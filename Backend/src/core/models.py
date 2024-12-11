@@ -180,8 +180,16 @@ class Appointment(models.Model):
         ('declined', 'Declined'),
     )
 
-    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="appointments_as_patient")
-    doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="appointments_as_doctor")
+    patient = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,  # Automatically delete appointments if the user is deleted
+        related_name="appointments_as_patient"
+    )
+    doctor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,  # Automatically delete appointments if the user is deleted
+        related_name="appointments_as_doctor"
+    )
     appointment_date = models.DateTimeField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')

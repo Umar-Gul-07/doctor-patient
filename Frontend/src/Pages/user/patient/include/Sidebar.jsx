@@ -1,7 +1,22 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 
 const Sidebar = () => {
   const navigate = useNavigate(); // Initialize the navigate function
+
+  const [userName, setUserName] = useState('User Name'); // Default name
+  const [userEmail, setUserEmail] = useState('user@example.com'); // Default email
+  const [userRole, setUserRole] = useState('Role'); // Default role
+
+  useEffect(() => {
+    // Fetch user data from localStorage
+    const name = localStorage.getItem('name') || 'User Name'; // Update if name is stored
+    const email = localStorage.getItem('user_email') || 'user@example.com';
+    const role = localStorage.getItem('role') || 'Role';
+    setUserName(name);
+    setUserEmail(email);
+    setUserRole(role);
+  }, []);
 
     // Logout function
     const handleLogout = () => {
@@ -30,27 +45,14 @@ const Sidebar = () => {
                     </div>
                     <div className="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
                     <img
-                  src="../assets/images/client/09.jpg"
+                  src="../assets/images/default.jpg"
                   className="rounded-circle shadow-md avatar avatar-md-md"
                   alt=""
                 />
-                <h5 className="mt-3 mb-1">Christopher Burrell</h5>
-                <p className="text-muted mb-0">25 Years old</p>
+                <h5 className="mt-3 mb-1">{userName}</h5>
               </div>
               <div className="list-unstyled p-4">
-                <div className="progress-box mb-4">
-                  <h6 className="title">Complete your profile</h6>
-                  <div className="progress">
-                    <div
-                      className="progress-bar position-relative bg-primary"
-                      style={{ width: "89%" }}
-                    >
-                      <div className="progress-value d-block text-muted h6">
-                        89%
-                      </div>
-                    </div>
-                  </div>
-                </div>
+               
                     </div>
                     <ul className="list-unstyled sidebar-nav mb-0">
                         <li className="navbar-item">

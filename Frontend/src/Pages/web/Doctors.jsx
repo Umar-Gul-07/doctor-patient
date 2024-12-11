@@ -64,7 +64,7 @@ const Doctor = () => {
                                 <div className="card team border-0 rounded shadow overflow-hidden">
                                     <div className="team-img position-relative">
                                         <img
-                                            src={"../assets/images/doctors/01.jpg"} // Fallback to default image
+                                            src={"../assets/images/default.jpg"} // Fallback to default image
                                             className="img-fluid"
                                             alt={doctor.first_name}
                                         />

@@ -22,15 +22,18 @@ const Login = () => {
             const response = await api.post('/login/', { email, password });
 
             // Get the token and user details from the response
-            const { user_id, role } = response.data;
+            const { user_id, role, user_email,name} = response.data;
+            console.log(response.data)
 
             // Store the token and user info in localStorage or state
             localStorage.setItem('user_id', user_id);
             localStorage.setItem('role', role);
+            localStorage.setItem('user_email', user_email);
+            localStorage.setItem('name', name);
 
             // Redirect based on the role
             if (role === 'doctor') {
-                navigate('/doctor/dashboard');
+                navigate('/doctor/appointment');
             } else if (role === 'patient') {
                 navigate('/patient/dashboard');
             }

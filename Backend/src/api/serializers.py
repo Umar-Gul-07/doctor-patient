@@ -70,7 +70,9 @@ class LoginSerializer(serializers.Serializer):
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
+    patient_details = UserSerializer(source='patient', read_only=True)  # Nested patient details
+
     class Meta:
         model = Appointment
-        fields = ['id', 'patient', 'doctor', 'appointment_date', 'status', 'created_on']
-        read_only_fields = ['id', 'status', 'created_on']
+        fields = ['id', 'patient_details', 'doctor', 'appointment_date', 'status']
+        read_only_fields = ['id', 'patient']

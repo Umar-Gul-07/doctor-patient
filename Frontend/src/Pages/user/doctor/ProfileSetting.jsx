@@ -11,7 +11,7 @@ const ProfileSetting = () => {
       <div className="row align-items-center">
         <div className="col-lg-2 col-md-4">
           <img
-            src="../assets/images/doctors/01.jpg"
+            src="../assets/images/default.jpg"
             className="avatar avatar-md-md rounded-pill shadow mx-auto d-block"
             alt=""
           />

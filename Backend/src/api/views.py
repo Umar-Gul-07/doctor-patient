@@ -9,6 +9,7 @@ from .serializers import (
     UserSerializer
 )
 from ..core.models import ContactForm, Appointment,User
+from rest_framework.generics import CreateAPIView
 
 
 # Contact Form View
@@ -42,7 +43,8 @@ class LoginView(APIView):
                 {
                     "user_id": user.id,
                     "role": user.role,
-                    "email": user.email,
+                    "user_email": user.email,
+                    "name":user.first_name+user.last_name
                 },
                 status=status.HTTP_200_OK,
             )
@@ -50,14 +52,21 @@ class LoginView(APIView):
 
 
 # Create Appointment
-class AppointmentCreateView(generics.CreateAPIView):
+class AppointmentCreateView(CreateAPIView):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(patient=self.request.user)
-
-
+    def post(self, request, *args, **kwargs):
+        user_id = request.data.get("patient_id")  # Get user_id from the request or local storage
+        serializer = self.get_serializer(data=request.data)
+        
+        if serializer.is_valid():
+            serializer.save(patient_id=user_id)  # Use patient_id from the request or local storage
+            return Response(
+                {"detail": "Appointment created successfully", "appointment": serializer.data},
+                status=status.HTTP_201_CREATED
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 # Approve or Decline Appointment
 class AppointmentUpdateView(generics.UpdateAPIView):
     queryset = Appointment.objects.all()
