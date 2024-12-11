@@ -9,7 +9,7 @@ function Footer() {
                     <div className="row">
                         <div className="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
                             <Link to="#" className="logo-footer">
-                                <img src="../assets/images/logo-light.png" height={22} alt="" />
+                                <img src="../assets/images/dark-logo.jpeg" height={22} alt="" />
                             </Link>
                             <p className="mt-4 me-xl-5">
                                 Great doctor if you need your family member to get effective immediate
