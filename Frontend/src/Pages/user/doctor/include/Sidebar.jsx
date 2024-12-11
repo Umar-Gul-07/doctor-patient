@@ -5,13 +5,15 @@ const Sidebar = () => {
 
     // Logout function
     const handleLogout = () => {
-        // Remove the token from local storage (or sessionStorage or cookies)
-        localStorage.removeItem('authToken'); // Or wherever your token is stored
-
-        // Optionally, remove any user-related information
-        localStorage.removeItem('userInfo'); // For example, remove user data as well
-
-        // Redirect to the login page after logout
+        // Remove user-related data
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('role');
+    
+        // Dispatch a custom event
+        const logoutEvent = new Event('userLogout');
+        window.dispatchEvent(logoutEvent);
+    
+        // Redirect to the login page
         navigate('/login');
     };
     return (

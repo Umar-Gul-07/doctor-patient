@@ -6,7 +6,6 @@ import PatientBase from "./Pages/user/patient/Base";
 import DoctorBase from "./Pages/user/doctor/Base";
 import Home from "./Pages/web/Home";
 import Doctor from "./Pages/web/Doctors";
-import Pharmacy from "./Pages/web/Pharmacy";
 import About from "./Pages/web/About";
 import Contact from "./Pages/web/Contact";
 import Login from "./Pages/web/Login";
@@ -37,7 +36,6 @@ function App() {
           {/* Web Routes */}
           <Route path='/' element={<Base><Home /></Base>} />
           <Route path='/doctor' element={<Base><Doctor /></Base>} />
-          <Route path='/pharmacy' element={<Base><Pharmacy /></Base>} />
           <Route path='/about-us' element={<Base><About /></Base>} />
           <Route path='/contact-us' element={<Base><Contact /></Base>} />
           <Route path='/login' element={<Login />} />

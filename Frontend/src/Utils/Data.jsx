@@ -1,3 +1,5 @@
+import api from "./Axios";
+
 const ContactInfo = {
     contact_phone: "+923029677678",
     contact_email: "zararanwar1234321@gmail.com",
@@ -10,18 +12,30 @@ const ContactInfo = {
 }
 
 
-const teamMembers = [
-    {id:1, name: "Alice Smith", title: "Project Manager" },
-    {id:2, name: "Bob Johnson", title: "Software Engineer" },
-    {id:3, name: "Catherine Lee", title: "UX Designer" },
-    {id:4, name: "David Brown", title: "Data Analyst" },
-    {id:5, name: "Emily Davis", title: "Marketing Specialist" },
-    {id:6, name: "Frank Wilson", title: "Quality Assurance" },
-    {id:7, name: "Grace Taylor", title: "Content Strategist" },
-    {id:8, name: "Henry Moore", title: "DevOps Engineer" },
-   
-];
-
 const server_ip = 'http://localhost:800'
 
-export { ContactInfo, teamMembers, server_ip}
+
+ const fetchUsers = async () => {
+    try {
+        const response = await api.get("/users/");
+        return response.data; // Return the data from the API response
+    } catch (error) {
+        console.error('Error fetching doctors:', error);
+        throw error; // Re-throw the error for further handling
+    }
+};
+
+// Function to fetch all appointments
+export const fetchAppointments = async () => {
+    try {
+        const response = await api.get("/appointments/");
+        return response.data; // Return the data from the API response
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+        throw error; // Re-throw the error for further handling
+    }
+};
+
+
+
+export { ContactInfo, server_ip,fetchUsers}

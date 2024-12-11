@@ -3,6 +3,7 @@ from django.db import models
 
 from phonenumber_field.modelfields import PhoneNumberField
 
+from django.conf import settings
 
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
@@ -170,3 +171,23 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class Appointment(models.Model):
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('declined', 'Declined'),
+    )
+
+    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="appointments_as_patient")
+    doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="appointments_as_doctor")
+    appointment_date = models.DateTimeField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return f"Appointment with Dr. {self.doctor.first_name} on {self.appointment_date}"

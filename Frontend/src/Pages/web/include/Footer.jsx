@@ -27,11 +27,7 @@ function Footer() {
                                                 <i className="mdi mdi-chevron-right me-1" /> Doctors
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link to="/pharmacy" className="text-foot">
-                                                <i className="mdi mdi-chevron-right me-1" /> Pharmacy
-                                            </Link>
-                                        </li>
+                                       
                                         <li>
                                             <Link to="/about-us" className="text-foot">
                                                 <i className="mdi mdi-chevron-right me-1" /> About Us

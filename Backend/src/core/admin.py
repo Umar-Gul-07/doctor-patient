@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
 
 from .models import (
-    Country, Application, ContactForm, User
+    Country, Application, ContactForm, User,Appointment
 )
 
 
@@ -45,6 +45,21 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions')
+
+
+@admin.register(Appointment)
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'patient', 'doctor', 'appointment_date', 'status', 'created_on')
+    list_filter = ('status', 'appointment_date', 'created_on')
+    search_fields = ('patient__email', 'doctor__email', 'status')
+    ordering = ('-created_on',)
+    readonly_fields = ('created_on',)
+
+    def get_readonly_fields(self, request, obj=None):
+        # Make `status` editable only for superusers
+        if obj and not request.user.is_superuser:
+            return self.readonly_fields + ('status',)
+        return self.readonly_fields
 
 
 admin.site.register(User, UserAdmin)

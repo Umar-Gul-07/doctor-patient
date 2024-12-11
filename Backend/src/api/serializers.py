@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from ..core.models import ContactForm,User
+from ..core.models import ContactForm,User,Appointment
 
 
 class ContactFormSerializer(serializers.ModelSerializer):
@@ -36,6 +36,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return user
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'role', 'first_name', 'last_name'] 
+
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
@@ -61,3 +67,10 @@ class LoginSerializer(serializers.Serializer):
 
         return user
 
+
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Appointment
+        fields = ['id', 'patient', 'doctor', 'appointment_date', 'status', 'created_on']
+        read_only_fields = ['id', 'status', 'created_on']
